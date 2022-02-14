@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+
+using std::cin;
+using std::cout;
+
+int cal_BW_function(int, int, char**);
+int cal_WB_function(int, int, char**);
+
+int main() {
+
+    int row, columm;//세로 x 가로
+
+    cin >> row;
+    cin >> columm;
+
+    char** data = new char* [row];
+    for (int i = 0; i < row; i++)
+        data[i] = new char[columm];
+    //clear
+
+
+
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < columm; j++) {
+            cin >> data[i][j];
+        }
+    }
+
+    int cal_row, cal_columm;
+    int cal_BW = 0, cal_WB = 0;
+
+
+    cal_row = row - 7;
+    cal_columm = columm - 7;
+
+    int WB;
+    int BW;
+
+    WB = cal_WB_function(cal_row, cal_columm, data);
+
+    BW = cal_BW_function(cal_row, cal_columm, data);
+
+    int answer;
+
+    if (WB > BW)
+        answer = BW;
+    else answer = WB;
+
+    cout << answer;
+
+    return 0;
+
+}
+
+
+
+int cal_BW_function(int row, int columm, char** data) {
+    int answer = 65;
+    int tmp;
+
+
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < columm; j++) {
+            tmp = 0;
+            for (int a = i; a < i + 8; a++) {
+                for (int b = j; b < j + 8; b++) {
+                    if ((a + b + i + j) % 2 == 0) {
+                        if ('W' == data[a][b])
+                            tmp++;
+                    }
+                    else {
+                        if ('B' == data[a][b])
+                            tmp++;
+                    }
+                }
+            }
+            //ab end
+            if (answer > tmp)
+                answer = tmp;
+        }
+    }//ij end
+
+
+    return answer;
+}
+
+
+int cal_WB_function(int row, int columm, char** data) {
+    int answer = 65;
+    int tmp;
+
+
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < columm; j++) { 
+            tmp = 0;
+            for (int a = i; a < i + 8; a++) {
+                for (int b = j; b < j + 8; b++) {
+                    if ((a + b + i + j) % 2 == 0) {
+                        if ('B' == data[a][b])
+                            tmp++;
+                    }
+                    else {
+                        if ('W' == data[a][b])
+                            tmp++;
+                    }
+                }
+            }
+            //ab end
+            if (answer > tmp)
+                answer = tmp;
+        }
+    }//ij end
+    return answer;
+}
