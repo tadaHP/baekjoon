@@ -1,0 +1,59 @@
+#include <string>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using std::cout; using std::cin; using std::string;
+
+
+bool palindrome(int num_i) {
+	
+	string num;
+
+	string front, back;
+
+
+	num = std::to_string(num_i);//int->string, useless 0 will be deleted
+
+	//make odd to even ->
+	if (num.size() % 2 != 0) {//if num==is off
+		num.erase((num.size() - 1) / 2, 1);
+	}
+
+	//seperate and checking
+	front = num.substr(0, num.size() / 2);
+	back = num.substr(num.size() / 2);
+
+	reverse(back.begin(), back.end());
+
+	if (front == back) return true;
+	else return false;
+	
+
+	
+}
+
+
+int main() {
+
+	int num_i=1;
+	bool truth;
+
+	while (1) {
+		
+		cin >> num_i;
+		if (num_i == 0) break;
+
+		truth = palindrome(num_i);
+
+		if (truth)
+			cout << "yes";
+		else
+			cout << "no";
+
+		cout << "\n";
+
+	}
+
+	return 0;
+}
