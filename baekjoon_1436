@@ -1,0 +1,60 @@
+#include <string>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using std::cout; using std::cin; using std::string;
+
+int main() {
+
+	string num = "666";
+
+	string tmp_s;//for tmp
+
+	int n;
+	int first = 666;//start
+	int i = 1;//1st num 666
+	int bin;
+
+	int answer = first;
+
+	bool checker=false;
+	bool minor = false;
+
+	cin >> n;
+
+	while (1) {
+		
+		if (n == i)break;
+
+		checker = false;
+		minor = true;
+		first++;
+		tmp_s = std::to_string(first);
+
+		for (int j = 0; j < tmp_s.length() - 2; j++) {
+
+			if (tmp_s.substr(j, 3) == num && checker == false) {
+				bin = answer;
+				answer = first;
+				i++;
+				checker = true;
+			}
+			else if (tmp_s.substr(j, 3) == num && checker) {
+				if (minor)continue;
+				answer = bin;
+				i--;
+				minor = true;
+
+			}
+
+		}
+
+		
+
+	}
+
+	cout << answer;
+
+	return 0;
+}
