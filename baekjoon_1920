@@ -27,5 +27,6 @@ int main() {
 		cin >> tmp;
 		cout << std::binary_search(num, num + n, tmp) << "\n";
 	}
+	
 	return 0;
 }
