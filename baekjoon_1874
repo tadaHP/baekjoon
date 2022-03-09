@@ -1,0 +1,48 @@
+#include <string>
+#include <iostream>
+#include <stack>
+#include <string>
+
+using std::cout; using std::cin; using std::string;
+using std::stack;
+
+
+int main() {
+
+	int n;
+	int tmp;
+	int max = 0;
+	int ans = 0;
+
+	stack<int> num;
+	
+
+	cin >> n;
+	string *answer = new string[2*n];
+	
+	tmp = 0;
+	while (n--) {
+
+		cin >> tmp;
+
+		if (tmp>max) {
+			for (int i = max + 1; i <= tmp; i++) {
+				num.push(i);
+				answer[ans++] = '+';
+			}
+		}
+		else if (num.top() != tmp) {
+			cout << "NO";
+			return 0;
+		}
+		num.pop();
+		answer[ans++] = '-';
+		if (max < tmp)max = tmp;
+	}
+
+	for (int i = 0; i < ans; i++) {
+		cout << answer[i] << "\n";
+	}
+
+	return 0;
+}
